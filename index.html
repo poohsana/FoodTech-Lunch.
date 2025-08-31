@@ -296,7 +296,7 @@
                         <button onclick="showSlide(0)" id="slideBtn0" class="px-4 py-2 text-sm bg-blue-500 text-white rounded transition-colors">⭐ เมนูพิเศษ</button>
                         <button onclick="showSlide(1)" id="slideBtn1" class="px-4 py-2 text-sm bg-blue-100 hover:bg-blue-200 rounded transition-colors">🎬 วิดีโอ</button>
                         <button onclick="showSlide(2)" id="slideBtn2" class="px-4 py-2 text-sm bg-blue-100 hover:bg-blue-200 rounded transition-colors">🍽️ เมนูทั้งหมด</button>
-                        <button onclick="toggleFullscreen()" id="fullscreenBtn" class="px-4 py-2 text-sm bg-purple-500 hover:bg-purple-600 text-white rounded transition-colors">🖥️ เต็มหน้าจอ</button>
+                        <button onclick="toggleFullscreen()" id="fullscreenBtn" class="hidden md:inline-block px-4 py-2 text-sm bg-purple-500 hover:bg-purple-600 text-white rounded transition-colors">🖥️ เต็มหน้าจอ</button>
                     </div>
                 </div>
 
@@ -338,8 +338,8 @@
 
                             <!-- Video Display -->
                             <div id="videoDisplay" class="w-full max-w-4xl mx-auto px-4">
-                                <div id="videoContainer" class="w-full bg-black rounded-xl overflow-hidden shadow-lg transition-all duration-300 aspect-video">
-                                    <div class="flex items-center justify-center h-full bg-gray-100 text-gray-600 rounded-lg">
+                                <div id="videoContainer" class="w-full bg-gradient-to-br from-blue-50 to-green-50 rounded-xl overflow-hidden shadow-lg transition-all duration-300 aspect-video">
+                                    <div class="flex items-center justify-center h-full bg-gradient-to-br from-blue-50 to-green-50 text-gray-600 rounded-lg">
                                         <div class="text-center p-4">
                                             <div class="text-4xl md:text-6xl mb-4">🎬</div>
                                             <p class="text-lg md:text-xl">ยังไม่มีวิดีโอ</p>
@@ -644,7 +644,7 @@
                         `;
                     } else {
                         videoContainer.innerHTML = `
-                            <div class="flex items-center justify-center h-full bg-red-100 text-red-600 rounded-lg">
+                            <div class="flex items-center justify-center h-full bg-gradient-to-br from-red-50 to-red-100 text-red-600 rounded-lg">
                                 <div class="text-center p-4">
                                     <div class="text-2xl md:text-4xl mb-2">❌</div>
                                     <p class="text-sm md:text-base">ลิงก์ YouTube ไม่ถูกต้อง</p>
@@ -661,7 +661,7 @@
                             <source src="${currentMenu.video.file}" type="video/mov">
                             <source src="${currentMenu.video.file}" type="video/avi">
                             <source src="${currentMenu.video.file}" type="video/webm">
-                            <div class="flex items-center justify-center h-full bg-yellow-100 text-yellow-600">
+                            <div class="flex items-center justify-center h-full bg-gradient-to-br from-yellow-50 to-yellow-100 text-yellow-600">
                                 <div class="text-center p-4">
                                     <div class="text-2xl md:text-4xl mb-2">⚠️</div>
                                     <p class="text-sm md:text-base">เบราว์เซอร์ของคุณไม่รองรับการเล่นวิดีโอนี้</p>
@@ -671,7 +671,7 @@
                     `;
                 } else {
                     videoContainer.innerHTML = `
-                        <div class="flex items-center justify-center h-full bg-gray-100 text-gray-600 rounded-lg">
+                        <div class="flex items-center justify-center h-full bg-gradient-to-br from-blue-50 to-green-50 text-gray-600 rounded-lg">
                             <div class="text-center p-4">
                                 <div class="text-2xl md:text-4xl mb-2">📹</div>
                                 <p class="text-sm md:text-base">ไม่พบข้อมูลวิดีโอ</p>
@@ -682,7 +682,7 @@
             } else {
                 console.log('No video data found'); // Debug log
                 videoContainer.innerHTML = `
-                    <div class="flex items-center justify-center h-full bg-gray-100 text-gray-600 rounded-lg">
+                    <div class="flex items-center justify-center h-full bg-gradient-to-br from-blue-50 to-green-50 text-gray-600 rounded-lg">
                         <div class="text-center p-4">
                             <div class="text-4xl md:text-6xl mb-4">🎬</div>
                             <p class="text-lg md:text-xl">ยังไม่มีวิดีโอ</p>
@@ -827,7 +827,7 @@
             
             // Remove old height style and apply responsive classes
             videoContainer.style.height = '';
-            videoContainer.className = `w-full bg-black rounded-xl overflow-hidden shadow-lg transition-all duration-300 ${aspectRatio}`;
+            videoContainer.className = `w-full bg-gradient-to-br from-blue-50 to-green-50 rounded-xl overflow-hidden shadow-lg transition-all duration-300 ${aspectRatio}`;
             videoDisplay.className = `w-full ${maxWidth} mx-auto px-4`;
             
             // Refresh video display to apply new size
@@ -864,24 +864,38 @@
         // Listen for fullscreen changes
         document.addEventListener('fullscreenchange', function() {
             const fullscreenBtn = document.getElementById('fullscreenBtn');
+            const displayPage = document.getElementById('displayPage');
             if (document.fullscreenElement) {
                 fullscreenBtn.innerHTML = '🔲 ออกจากเต็มหน้าจอ';
+                // Add background gradient when in fullscreen
+                displayPage.style.background = 'linear-gradient(to bottom right, rgb(239 246 255), rgb(240 253 244))';
+                displayPage.style.minHeight = '100vh';
             } else {
                 fullscreenBtn.innerHTML = '🖥️ เต็มหน้าจอ';
+                // Remove background when exiting fullscreen
+                displayPage.style.background = '';
+                displayPage.style.minHeight = '';
             }
         });
 
         // Handle webkit fullscreen change
         document.addEventListener('webkitfullscreenchange', function() {
             const fullscreenBtn = document.getElementById('fullscreenBtn');
+            const displayPage = document.getElementById('displayPage');
             if (document.webkitFullscreenElement) {
                 fullscreenBtn.innerHTML = '🔲 ออกจากเต็มหน้าจอ';
+                // Add background gradient when in fullscreen
+                displayPage.style.background = 'linear-gradient(to bottom right, rgb(239 246 255), rgb(240 253 244))';
+                displayPage.style.minHeight = '100vh';
             } else {
                 fullscreenBtn.innerHTML = '🖥️ เต็มหน้าจอ';
+                // Remove background when exiting fullscreen
+                displayPage.style.background = '';
+                displayPage.style.minHeight = '';
             }
         });
 
 
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'977a2d59760c731c',t:'MTc1NjYxODY1OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'977a30c0f36c731c',t:'MTc1NjYxODc5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
