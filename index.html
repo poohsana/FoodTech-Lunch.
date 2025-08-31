@@ -864,38 +864,72 @@
         // Listen for fullscreen changes
         document.addEventListener('fullscreenchange', function() {
             const fullscreenBtn = document.getElementById('fullscreenBtn');
-            const displayPage = document.getElementById('displayPage');
+            const body = document.body;
             if (document.fullscreenElement) {
                 fullscreenBtn.innerHTML = '🔲 ออกจากเต็มหน้าจอ';
-                // Add background gradient when in fullscreen
-                displayPage.style.background = 'linear-gradient(to bottom right, rgb(239 246 255), rgb(240 253 244))';
-                displayPage.style.minHeight = '100vh';
+                // Add background gradient to body when in fullscreen
+                body.style.background = 'linear-gradient(to bottom right, rgb(239 246 255), rgb(240 253 244))';
+                body.style.minHeight = '100vh';
             } else {
                 fullscreenBtn.innerHTML = '🖥️ เต็มหน้าจอ';
-                // Remove background when exiting fullscreen
-                displayPage.style.background = '';
-                displayPage.style.minHeight = '';
+                // Restore original background when exiting fullscreen
+                body.style.background = '';
+                body.style.minHeight = '';
+                body.className = 'bg-gradient-to-br from-blue-50 to-green-50 min-h-screen';
             }
         });
 
-        // Handle webkit fullscreen change
+        // Handle webkit fullscreen change (Safari)
         document.addEventListener('webkitfullscreenchange', function() {
             const fullscreenBtn = document.getElementById('fullscreenBtn');
-            const displayPage = document.getElementById('displayPage');
+            const body = document.body;
             if (document.webkitFullscreenElement) {
                 fullscreenBtn.innerHTML = '🔲 ออกจากเต็มหน้าจอ';
-                // Add background gradient when in fullscreen
-                displayPage.style.background = 'linear-gradient(to bottom right, rgb(239 246 255), rgb(240 253 244))';
-                displayPage.style.minHeight = '100vh';
+                // Add background gradient to body when in fullscreen
+                body.style.background = 'linear-gradient(to bottom right, rgb(239 246 255), rgb(240 253 244))';
+                body.style.minHeight = '100vh';
             } else {
                 fullscreenBtn.innerHTML = '🖥️ เต็มหน้าจอ';
-                // Remove background when exiting fullscreen
-                displayPage.style.background = '';
-                displayPage.style.minHeight = '';
+                // Restore original background when exiting fullscreen
+                body.style.background = '';
+                body.style.minHeight = '';
+                body.className = 'bg-gradient-to-br from-blue-50 to-green-50 min-h-screen';
+            }
+        });
+
+        // Handle Mozilla fullscreen change (Firefox)
+        document.addEventListener('mozfullscreenchange', function() {
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            const body = document.body;
+            if (document.mozFullScreenElement) {
+                fullscreenBtn.innerHTML = '🔲 ออกจากเต็มหน้าจอ';
+                body.style.background = 'linear-gradient(to bottom right, rgb(239 246 255), rgb(240 253 244))';
+                body.style.minHeight = '100vh';
+            } else {
+                fullscreenBtn.innerHTML = '🖥️ เต็มหน้าจอ';
+                body.style.background = '';
+                body.style.minHeight = '';
+                body.className = 'bg-gradient-to-br from-blue-50 to-green-50 min-h-screen';
+            }
+        });
+
+        // Handle MS fullscreen change (Edge/IE)
+        document.addEventListener('msfullscreenchange', function() {
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            const body = document.body;
+            if (document.msFullscreenElement) {
+                fullscreenBtn.innerHTML = '🔲 ออกจากเต็มหน้าจอ';
+                body.style.background = 'linear-gradient(to bottom right, rgb(239 246 255), rgb(240 253 244))';
+                body.style.minHeight = '100vh';
+            } else {
+                fullscreenBtn.innerHTML = '🖥️ เต็มหน้าจอ';
+                body.style.background = '';
+                body.style.minHeight = '';
+                body.className = 'bg-gradient-to-br from-blue-50 to-green-50 min-h-screen';
             }
         });
 
 
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9779d02815e7731c',t:'MTc1NjYxNDg0MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'977a3da6a125a1ae',t:'MTc1NjYxOTMyNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
